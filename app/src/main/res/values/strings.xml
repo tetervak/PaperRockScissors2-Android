@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Paper Rock or Scissors</string>
+
+    <string name="make_your_choice">Make your choice</string>
+    <string name="game_result">Game result</string>
+
+    <string name="paper">Paper</string>
+    <string name="rock">Rock</string>
+    <string name="scissors">Scissors</string>
+
+    <string name="play">Play</string>
+    <string name="replay">Replay</string>
+
+    <string name="you_win">You are the winner!</string>
+    <string name="computer_wins">Computer wins</string>
+    <string name="play_again">Play again</string>
+    <string name="computer">Computer</string>
+    <string name="you">You</string>
+
+</resources>
