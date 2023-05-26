@@ -14,18 +14,18 @@ class MainViewModel : ViewModel() {
     private val _gameUiState: MutableState<GameUiState> =
         mutableStateOf(GameUiState())
 
-    val gameUiSate: State<GameUiState> = _gameUiState
+    val gameUiState: State<GameUiState> = _gameUiState
 
     private val gameService: GameService = GameServiceImpl()
 
     fun updateUserChoice(userChoice: Choice) {
-        val uiState = gameUiSate.value
+        val uiState = gameUiState.value
         val newUiState = uiState.copy(userChoice = userChoice)
         _gameUiState.value = newUiState
     }
 
     fun onPlay() {
-        val uiState = gameUiSate.value
+        val uiState = gameUiState.value
         val computerChoice = gameService.getRandomChoice()
         val newUiState = uiState.copy(
             computerChoice = computerChoice,
@@ -39,7 +39,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun onReplay() {
-        val uiState = gameUiSate.value
+        val uiState = gameUiState.value
         val newUiState = uiState.copy(screen = Screen.INPUT)
         _gameUiState.value = newUiState
     }
