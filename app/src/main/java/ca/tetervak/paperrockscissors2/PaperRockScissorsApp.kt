@@ -21,7 +21,7 @@ fun PaperRockScissorsApp() {
             color = MaterialTheme.colorScheme.background
         ) {
             val viewModel: MainViewModel = viewModel()
-            val uiState: GameUiState by viewModel.gameUiSate
+            val uiState: GameUiState by viewModel.gameUiState
 
             when (uiState.screen) {
                 Screen.INPUT -> InputScreen(
