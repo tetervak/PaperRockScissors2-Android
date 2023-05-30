@@ -37,7 +37,8 @@ fun OutputScreen(
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
-            .padding(32.dp),
+            .padding(32.dp)
+            .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import ca.tetervak.paperrockscissors2.model.Choice
 import ca.tetervak.paperrockscissors2.model.GameService
 import ca.tetervak.paperrockscissors2.model.GameServiceImpl
-import ca.tetervak.paperrockscissors2.screens.Screen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -32,15 +31,8 @@ class MainViewModel : ViewModel() {
                 gameResult = gameService.getGameResult(
                     userChoice = uiState.userChoice,
                     computerChoice = computerChoice
-                ),
-                screen = Screen.OUTPUT
+                )
             )
-        }
-    }
-
-    fun onReplay() {
-        _uiStateFlow.update { uiState ->
-            uiState.copy(screen = Screen.INPUT)
         }
     }
 }

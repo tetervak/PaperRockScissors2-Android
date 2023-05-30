@@ -8,9 +8,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import ca.tetervak.paperrockscissors2.screens.InputScreen
 import ca.tetervak.paperrockscissors2.screens.OutputScreen
-import ca.tetervak.paperrockscissors2.screens.Screen
 import ca.tetervak.paperrockscissors2.ui.theme.PaperRockScissorsTheme
 
 
@@ -24,19 +26,33 @@ fun PaperRockScissorsApp() {
             val viewModel: MainViewModel = viewModel()
             val uiState: GameUiState by viewModel.uiStateFlow.collectAsState()
 
-            when (uiState.screen) {
-                Screen.INPUT -> InputScreen(
-                    userChoice = uiState.userChoice,
-                    onUserChoiceChange = { viewModel.updateUserChoice(it) },
-                    onPlay = { viewModel.onPlay() }
-                )
-
-                Screen.OUTPUT -> OutputScreen(
-                    userChoice = uiState.userChoice,
-                    computerChoice = uiState.computerChoice,
-                    gameResult = uiState.gameResult,
-                    onReplay = { viewModel.onReplay() }
-                )
+            val navController = rememberNavController()
+            NavHost(
+                navController = navController,
+                startDestination = "input"
+            ) {
+                composable(route = "input") {
+                    InputScreen(
+                        userChoice = uiState.userChoice,
+                        onUserChoiceChange = {
+                            viewModel.updateUserChoice(it)
+                        },
+                        onPlay = {
+                            viewModel.onPlay()
+                            navController.navigate(route = "output")
+                        }
+                    )
+                }
+                composable(route = "output") {
+                    OutputScreen(
+                        userChoice = uiState.userChoice,
+                        computerChoice = uiState.computerChoice,
+                        gameResult = uiState.gameResult,
+                        onReplay = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
             }
         }
     }
