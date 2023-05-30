@@ -1,31 +1,30 @@
 package ca.tetervak.paperrockscissors2
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import ca.tetervak.paperrockscissors2.model.Choice
 import ca.tetervak.paperrockscissors2.model.GameService
 import ca.tetervak.paperrockscissors2.model.GameServiceImpl
 import ca.tetervak.paperrockscissors2.screens.Screen
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class MainViewModel : ViewModel() {
 
-    private val _gameUiState: MutableState<GameUiState> =
-        mutableStateOf(GameUiState())
+    private val _uiStateFlow: MutableStateFlow<GameUiState> =
+        MutableStateFlow(GameUiState())
 
-    val gameUiState: State<GameUiState> = _gameUiState
+    val uiStateFlow: StateFlow<GameUiState> = _uiStateFlow
 
     private val gameService: GameService = GameServiceImpl()
 
     fun updateUserChoice(userChoice: Choice) {
-        val uiState = gameUiState.value
+        val uiState = uiStateFlow.value
         val newUiState = uiState.copy(userChoice = userChoice)
-        _gameUiState.value = newUiState
+        _uiStateFlow.value = newUiState
     }
 
     fun onPlay() {
-        val uiState = gameUiState.value
+        val uiState = uiStateFlow.value
         val computerChoice = gameService.getRandomChoice()
         val newUiState = uiState.copy(
             computerChoice = computerChoice,
@@ -35,12 +34,12 @@ class MainViewModel : ViewModel() {
             ),
             screen = Screen.OUTPUT
         )
-        _gameUiState.value = newUiState
+        _uiStateFlow.value = newUiState
     }
 
     fun onReplay() {
-        val uiState = gameUiState.value
+        val uiState = uiStateFlow.value
         val newUiState = uiState.copy(screen = Screen.INPUT)
-        _gameUiState.value = newUiState
+        _uiStateFlow.value = newUiState
     }
 }

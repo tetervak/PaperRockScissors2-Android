@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -21,7 +22,7 @@ fun PaperRockScissorsApp() {
             color = MaterialTheme.colorScheme.background
         ) {
             val viewModel: MainViewModel = viewModel()
-            val uiState: GameUiState by viewModel.gameUiState
+            val uiState: GameUiState by viewModel.uiStateFlow.collectAsState()
 
             when (uiState.screen) {
                 Screen.INPUT -> InputScreen(
