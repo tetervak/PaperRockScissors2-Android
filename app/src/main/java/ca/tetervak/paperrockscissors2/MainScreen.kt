@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,13 +18,13 @@ import ca.tetervak.paperrockscissors2.ui.theme.PaperRockScissorsTheme
 
 
 @Composable
-fun PaperRockScissorsApp() {
+fun MainScreen() {
     PaperRockScissorsTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            val viewModel: MainViewModel = viewModel()
+            val viewModel: MainViewModel = hiltViewModel()
             val uiState: GameUiState by viewModel.uiStateFlow.collectAsState()
 
             val navController = rememberNavController()
