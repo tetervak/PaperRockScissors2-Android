@@ -50,9 +50,9 @@ android {
     }
 }
 
-kotlin {
-    jvmToolchain(8)
-}
+//kotlin {
+//    jvmToolchain(8)
+//}
 
 dependencies {
 
@@ -71,7 +71,7 @@ dependencies {
 
     // This is also surprisingly needed by Hilt when dependencies are injected into view-models
     // even without using the navigation
-    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+    //implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
 
