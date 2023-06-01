@@ -1,9 +1,11 @@
 package ca.tetervak.paperrockscissors2.model
 
+import javax.inject.Inject
 import kotlin.random.Random
 
 class GameServiceImpl(private val random: Random): GameService {
 
+    @Inject
     constructor():this(Random.Default)
 
     override fun getRandomChoice(): Choice =
