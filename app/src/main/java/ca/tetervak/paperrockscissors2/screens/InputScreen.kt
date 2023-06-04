@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ca.tetervak.paperrockscissors2.R
 import ca.tetervak.paperrockscissors2.model.Choice
-import ca.tetervak.paperrockscissors2.ui.theme.PaperRockScissorsTheme
+import ca.tetervak.paperrockscissors2.ui.theme.MainTheme
 
 @Composable
 fun InputScreen(
@@ -111,7 +111,7 @@ fun UserChoiceInput(
 @Preview(showBackground = true)
 @Composable
 fun InputScreenPreview() {
-    PaperRockScissorsTheme {
+    MainTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
