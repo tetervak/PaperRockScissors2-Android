@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import ca.tetervak.paperrockscissors2.R
 import ca.tetervak.paperrockscissors2.model.Choice
 import ca.tetervak.paperrockscissors2.model.GameResult
-import ca.tetervak.paperrockscissors2.ui.theme.PaperRockScissorsTheme
+import ca.tetervak.paperrockscissors2.ui.theme.MainTheme
 
 @Composable
 fun OutputScreen(
@@ -124,7 +124,7 @@ private fun resultToString(gameResult: GameResult): String =
 @Preview(showBackground = true)
 @Composable
 fun OutputScreenPreview() {
-    PaperRockScissorsTheme {
+    MainTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
