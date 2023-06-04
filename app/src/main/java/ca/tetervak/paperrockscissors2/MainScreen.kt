@@ -13,12 +13,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ca.tetervak.paperrockscissors2.screens.InputScreen
 import ca.tetervak.paperrockscissors2.screens.OutputScreen
-import ca.tetervak.paperrockscissors2.ui.theme.PaperRockScissorsTheme
+import ca.tetervak.paperrockscissors2.ui.theme.MainTheme
 
 
 @Composable
-fun PaperRockScissorsApp() {
-    PaperRockScissorsTheme {
+fun MainScreen() {
+    MainTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
