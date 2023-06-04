@@ -15,7 +15,7 @@ import ca.tetervak.paperrockscissors2.ui.theme.PaperRockScissorsTheme
 
 
 @Composable
-fun PaperRockScissorsApp() {
+fun MainScreen() {
     PaperRockScissorsTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
