@@ -11,21 +11,21 @@ import ca.tetervak.paperrockscissors2.screens.Screen
 
 class MainViewModel : ViewModel() {
 
-    private val _gameUiState: MutableState<GameUiState> =
+    private val _uiState: MutableState<GameUiState> =
         mutableStateOf(GameUiState())
 
-    val gameUiState: State<GameUiState> = _gameUiState
+    val uiState: State<GameUiState> = _uiState
 
     private val gameService: GameService = GameServiceImpl()
 
     fun updateUserChoice(userChoice: Choice) {
-        val uiState = gameUiState.value
+        val uiState = uiState.value
         val newUiState = uiState.copy(userChoice = userChoice)
-        _gameUiState.value = newUiState
+        _uiState.value = newUiState
     }
 
     fun onPlay() {
-        val uiState = gameUiState.value
+        val uiState = uiState.value
         val computerChoice = gameService.getRandomChoice()
         val newUiState = uiState.copy(
             computerChoice = computerChoice,
@@ -35,12 +35,12 @@ class MainViewModel : ViewModel() {
             ),
             screen = Screen.OUTPUT
         )
-        _gameUiState.value = newUiState
+        _uiState.value = newUiState
     }
 
     fun onReplay() {
-        val uiState = gameUiState.value
+        val uiState = uiState.value
         val newUiState = uiState.copy(screen = Screen.INPUT)
-        _gameUiState.value = newUiState
+        _uiState.value = newUiState
     }
 }

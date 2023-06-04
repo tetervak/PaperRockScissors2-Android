@@ -14,14 +14,14 @@ import ca.tetervak.paperrockscissors2.ui.theme.PaperRockScissorsTheme
 
 
 @Composable
-fun PaperRockScissorsApp() {
+fun MainScreen() {
     PaperRockScissorsTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
             val viewModel: MainViewModel = viewModel()
-            val uiState: GameUiState by viewModel.gameUiState
+            val uiState: GameUiState by viewModel.uiState
 
             when (uiState.screen) {
                 Screen.INPUT -> InputScreen(
