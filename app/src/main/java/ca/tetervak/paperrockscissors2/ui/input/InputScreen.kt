@@ -4,18 +4,23 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,8 +29,11 @@ import androidx.compose.ui.unit.sp
 import ca.tetervak.paperrockscissors2.R
 import ca.tetervak.paperrockscissors2.domain.Choice
 import ca.tetervak.paperrockscissors2.ui.common.GameButton
+import ca.tetervak.paperrockscissors2.ui.common.GameTopAppBar
+import ca.tetervak.paperrockscissors2.ui.navigation.InputDestination
 import ca.tetervak.paperrockscissors2.ui.theme.AppTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InputScreen(
     userChoice: Choice,
@@ -33,36 +41,41 @@ fun InputScreen(
     onPlay: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-            .verticalScroll(rememberScrollState())
-            .padding(32.dp)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = stringResource(id = R.string.app_name),
-            fontSize = 24.sp,
-            color = colorResource(id = R.color.pink_800)
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
+    Scaffold(modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection), topBar = {
+        GameTopAppBar(
+            title = stringResource(InputDestination.titleRes),
+            canNavigateBack = false,
+            scrollBehavior = scrollBehavior
         )
-        Text(
-            text = stringResource(R.string.make_your_choice),
-            fontSize = 20.sp,
-            color = colorResource(id = R.color.green_800)
-        )
-        UserChoiceInput(
-            userChoice = userChoice,
-            onChange = onUserChoiceChange
-        )
-        GameButton(
-            onClick = onPlay,
-            imageVector = Icons.Filled.Check,
-            stringRes = R.string.play
-        )
+    }) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
+                .padding(32.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(R.string.make_your_choice),
+                fontSize = 24.sp,
+                color = colorResource(id = R.color.green_800)
+            )
+            UserChoiceInput(
+                userChoice = userChoice,
+                onChange = onUserChoiceChange
+            )
+            GameButton(
+                onClick = onPlay,
+                imageVector = Icons.Filled.Check,
+                stringRes = R.string.play
+            )
+        }
     }
 }
-
 @Composable
 fun UserChoiceInput(
     userChoice: Choice,
