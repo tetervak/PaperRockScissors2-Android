@@ -6,6 +6,7 @@ import ca.tetervak.paperrockscissors2.domain.Choice
 import ca.tetervak.paperrockscissors2.domain.GameResult
 import ca.tetervak.paperrockscissors2.domain.GetComputerChoiceUseCase
 import ca.tetervak.paperrockscissors2.domain.GetGameResultUseCase
+import ca.tetervak.paperrockscissors2.ui.navigation.OutputDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class OutputViewModel @Inject constructor(
     val outputUiState: OutputUiState
 
     init {
-        val userChoice: Choice = savedStateHandle.get<Choice>("user_choice")!!
+        val userChoice: Choice = savedStateHandle.get<Choice>(OutputDestination.userChoiceArg)!!
         val computerChoice: Choice = getComputerChoiceUseCase()
         val gameResult: GameResult = getGameResultUseCase(
             userChoice = userChoice, computerChoice = computerChoice
