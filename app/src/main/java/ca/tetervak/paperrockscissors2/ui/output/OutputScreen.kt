@@ -1,4 +1,4 @@
-package ca.tetervak.paperrockscissors2.screens
+package ca.tetervak.paperrockscissors2.ui.output
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,8 +9,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -23,19 +21,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ca.tetervak.paperrockscissors2.R
-import ca.tetervak.paperrockscissors2.model.Choice
-import ca.tetervak.paperrockscissors2.model.GameResult
-import ca.tetervak.paperrockscissors2.ui.theme.MainTheme
+import ca.tetervak.paperrockscissors2.domain.Choice
+import ca.tetervak.paperrockscissors2.domain.GameResult
+import ca.tetervak.paperrockscissors2.ui.common.GameButton
+import ca.tetervak.paperrockscissors2.ui.theme.AppTheme
 
 @Composable
 fun OutputScreen(
     userChoice: Choice,
     computerChoice: Choice,
     gameResult: GameResult,
-    onReplay: () -> Unit
+    onReplay: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .verticalScroll(rememberScrollState())
             .padding(32.dp)
             .fillMaxSize(),
@@ -91,17 +91,11 @@ fun OutputScreen(
             fontSize = 20.sp,
             color = colorResource(id = R.color.orange_500)
         )
-
-        Button(onClick = onReplay) {
-            Icon(
-                imageVector = Icons.Filled.ArrowBack,
-                contentDescription = null
-            )
-            Text(
-                text = stringResource(R.string.replay),
-                fontSize = 20.sp
-            )
-        }
+        GameButton(
+            onClick = onReplay,
+            imageVector = Icons.Filled.ArrowBack,
+            stringRes = R.string.replay
+        )
     }
 }
 
@@ -124,7 +118,7 @@ private fun resultToString(gameResult: GameResult): String =
 @Preview(showBackground = true)
 @Composable
 fun OutputScreenPreview() {
-    MainTheme {
+    AppTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background

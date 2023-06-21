@@ -1,4 +1,4 @@
-package ca.tetervak.paperrockscissors2.model
+package ca.tetervak.paperrockscissors2.data.service
 
 import dagger.Binds
 import dagger.Module

@@ -1,4 +1,4 @@
-package ca.tetervak.paperrockscissors2.screens
+package ca.tetervak.paperrockscissors2.ui.input
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,8 +9,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
@@ -24,17 +22,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ca.tetervak.paperrockscissors2.R
-import ca.tetervak.paperrockscissors2.model.Choice
-import ca.tetervak.paperrockscissors2.ui.theme.MainTheme
+import ca.tetervak.paperrockscissors2.domain.Choice
+import ca.tetervak.paperrockscissors2.ui.common.GameButton
+import ca.tetervak.paperrockscissors2.ui.theme.AppTheme
 
 @Composable
 fun InputScreen(
     userChoice: Choice,
     onUserChoiceChange: (Choice) -> Unit,
-    onPlay: () -> Unit
+    onPlay: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .verticalScroll(rememberScrollState())
             .padding(32.dp)
             .fillMaxSize(),
@@ -55,25 +55,21 @@ fun InputScreen(
             userChoice = userChoice,
             onChange = onUserChoiceChange
         )
-        Button(onClick = onPlay) {
-            Icon(
-                imageVector = Icons.Filled.Check,
-                contentDescription = null
-            )
-            Text(
-                text = stringResource(R.string.play),
-                fontSize = 20.sp
-            )
-        }
+        GameButton(
+            onClick = onPlay,
+            imageVector = Icons.Filled.Check,
+            stringRes = R.string.play
+        )
     }
 }
 
 @Composable
 fun UserChoiceInput(
     userChoice: Choice,
-    onChange: (Choice) -> Unit
+    onChange: (Choice) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Column() {
+    Column(modifier = modifier) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             RadioButton(
                 selected = userChoice == Choice.PAPER,
@@ -111,7 +107,7 @@ fun UserChoiceInput(
 @Preview(showBackground = true)
 @Composable
 fun InputScreenPreview() {
-    MainTheme {
+    AppTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background

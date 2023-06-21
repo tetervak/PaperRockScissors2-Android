@@ -1,4 +1,4 @@
-package ca.tetervak.paperrockscissors2
+package ca.tetervak.paperrockscissors2.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -7,24 +7,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-//import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import ca.tetervak.paperrockscissors2.screens.InputScreen
-import ca.tetervak.paperrockscissors2.screens.OutputScreen
-import ca.tetervak.paperrockscissors2.ui.theme.MainTheme
+import ca.tetervak.paperrockscissors2.ui.input.InputScreen
+import ca.tetervak.paperrockscissors2.ui.output.OutputScreen
+import ca.tetervak.paperrockscissors2.ui.theme.AppTheme
 
 
 @Composable
-fun MainScreen() {
-    MainTheme {
+fun AppScreen() {
+    AppTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            val viewModel: MainViewModel = viewModel()
+            val viewModel: GameViewModel = viewModel()
             val uiState: GameUiState by viewModel.uiStateFlow.collectAsState()
 
             val navController = rememberNavController()
@@ -50,6 +49,7 @@ fun MainScreen() {
                         computerChoice = uiState.computerChoice,
                         gameResult = uiState.gameResult,
                         onReplay = {
+                            viewModel.onReplay()
                             navController.popBackStack()
                         }
                     )
