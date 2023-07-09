@@ -10,5 +10,5 @@ import dagger.hilt.components.SingletonComponent
 abstract class ServiceModule {
 
     @Binds
-    abstract fun provideGameService(service: GameServiceImpl): GameService
+    abstract fun bindGameService(service: GameServiceImpl): GameService
 }

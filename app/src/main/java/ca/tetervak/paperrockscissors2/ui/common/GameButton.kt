@@ -1,7 +1,10 @@
 package ca.tetervak.paperrockscissors2.ui.common
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +24,7 @@ fun GameButton(
         Icon(
             imageVector = imageVector, contentDescription = null
         )
+        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         Text(
             text = stringResource(stringRes), fontSize = 20.sp
         )
