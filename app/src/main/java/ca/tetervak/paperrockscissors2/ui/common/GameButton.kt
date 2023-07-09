@@ -22,7 +22,9 @@ fun GameButton(
 ) {
     Button(onClick = onClick, modifier = modifier) {
         Icon(
-            imageVector = imageVector, contentDescription = null
+            imageVector = imageVector,
+            contentDescription = null,
+            modifier = Modifier.size(ButtonDefaults.IconSize)
         )
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         Text(
